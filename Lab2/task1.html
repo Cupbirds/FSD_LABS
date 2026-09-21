@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BSCS-V-A (Shift-I)</title>
+<style>
+  :root{
+    --border: #000;
+    --bg: #fff;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+  }
+  .wrap {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 0 0 4px 0;
+  }
+  .uni-label {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+  }
+  .grid-container {
+    overflow-x: auto;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    border: 1px solid var(--border);
+  }
+  th, td {
+    border: 1px solid var(--border);
+    text-align: center;
+    vertical-align: middle;
+    padding: 6px;
+  }
+  col.dayCol { width: 60px; }
+
+  .day-header th {
+    font-size: 0.7rem;
+    font-weight: normal;
+    padding: 6px 4px;
+  }
+  .day-header .time-range {
+    font-weight: normal;
+  }
+  .day-header .time-24 {
+    font-size: 0.6rem;
+    color: #000;
+    margin-top: 2px;
+  }
+
+  .day-label {
+    font-size: 1.6rem;
+    font-weight: 400;
+  }
+
+  .cell {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    padding: 8px 4px;
+  }
+  .cell .teacher {
+    font-size: 0.65rem;
+  }
+  .cell .course {
+    font-weight: bold;
+    display: block;
+    margin: 6px 0;
+  }
+  .cell .room {
+    font-size: 0.65rem;
+  }
+  .empty { background: #fff; }
+
+  .lab-row td.lab-block {
+    font-size: 0.85rem;
+  }
+  .lab-block .teacher {
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+  }
+  .lab-block .course {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  .lab-block .room {
+    font-size: 0.75rem;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 700px) {
+    table { font-size: 0.6rem; }
+    .day-label { font-size: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="uni-label">Air Uni</div>
+  <h1>BSCS-V-A (Shift-I)</h1>
+
+  <div class="grid-container">
+  <table>
+    <colgroup>
+      <col class="dayCol">
+      <col><col><col><col><col><col><col>
+    </colgroup>
+    <thead>
+      <tr class="day-header">
+        <th></th>
+        <th><div class="time-range">08:00am-09:00am</div><div class="time-24">8:00 - 9:00</div></th>
+        <th><div class="time-range">09:00am-10:00am</div><div class="time-24">9:00 - 10:00</div></th>
+        <th><div class="time-range">10:00am-11:00am</div><div class="time-24">10:00 - 11:00</div></th>
+        <th><div class="time-range">11:00am-12:00pm</div><div class="time-24">11:00 - 12:00</div></th>
+        <th><div class="time-range">12:00pm-01:00pm</div><div class="time-24">12:00 - 1:00</div></th>
+        <th><div class="time-range">01:00pm-02:00pm</div><div class="time-24">1:00 - 2:00</div></th>
+        <th><div class="time-range">02:00pm-03:00pm</div><div class="time-24">2:00 - 3:00</div></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Monday -->
+      <tr>
+        <td class="day-label">Mo</td>
+        <td class="cell">
+          <span class="teacher">CS-Ms Maryam Wardah</span>
+          <span class="course">Artificial Intelligence</span>
+          <span class="room">C-205 (Shift-I)</span>
+        </td>
+        <td class="cell">
+          <span class="teacher">CS-Ms Warda Aslam / CS-Ms Eemaan Fatima</span>
+          <span class="course">Operating Systems</span>
+          <span class="room">Lecture Hall 01</span>
+        </td>
+        <td class="cell">
+          <span class="teacher">CS-Mr Muhammad Junaid Nazar</span>
+          <span class="course">Design and Analysis of Algorithms</span>
+          <span class="room">C-202 (Shift-I)</span>
+        </td>
+        <td class="cell">
+          <span class="teacher">Maths-Dr Waqas Sarwar Abbasi</span>
+          <span class="course">Linear Algebra</span>
+          <span class="room">C-301 (Shift-I)</span>
+        </td>
+        <td class="empty"></td>
+        <td class="cell">
+          <span class="teacher">AUSOM-Ms Ayesha Munir-VFM</span>
+          <span class="course">Introduction to Management</span>
+          <span class="room">C-303 (Shift-I)</span>
+        </td>
+        <td class="empty"></td>
+      </tr>
+
+      <!-- Tuesday -->
+      <tr class="lab-row">
+        <td class="day-label">Tu</td>
+        <td class="lab-block" colspan="3">
+          <span class="teacher">CS-Ms Maryam Wardah</span>
+          <span class="course">Artificial Intelligence Lab</span>
+          <span class="room">Lab 5 A Block (Shift-I)</span>
+        </td>
+        <td class="cell">
+          <span class="teacher">Maths-Dr Waqas Sarwar Abbasi</span>
+          <span class="course">Linear Algebra</span>
+          <span class="room">C-203 (Shift-I)</span>
+        </td>
+        <td class="cell">
+          <span class="teacher">CS-Mr Muhammad Junaid Nazar</span>
+          <span class="course">Design and Analysis of Algorithms</span>
+          <span class="room">C-302 (Shift-I)</span>
+        </td>
+        <td class="cell">
+          <span class="teacher">CS-Ms Warda Aslam CS-Ms Eemaan Fatima</span>
+          <span class="course">Operating Systems</span>
+          <span class="room">Lecture Hall 01</span>
+        </td>
+      </tr>
+
+      <!-- Wednesday -->
+      <tr class="lab-row">
+        <td class="day-label">We</td>
+        <td class="cell">
+          <span class="teacher">CS-Mr Muhammad Junaid Nazar</span>
+          <span class="course">Design and Analysis of Algorithms</span>
+          <span class="room">C-302 (Shift-I)</span>
+        </td>
+        <td class="lab-block" colspan="4">
+          <span class="teacher">CS-Ms Warda Aslam</span>
+          <span class="course">Operating Systems Lab</span>
+          <span class="room">Lab 13 C Block (3rd Floor) (Shift-I)</span>
+        </td>
+        <td class="cell">
+          <span class="teacher">CS-Mr Hafiz Obiad Ullah Khan / CS-Ms Asim Ali Fayyaz</span>
+          <span class="course">Full Stack Web Development</span>
+          <span class="room">Lecture Hall 01</span>
+        </td>
+      </tr>
+
+      <!-- Thursday -->
+      <tr class="lab-row">
+        <td class="day-label">Th</td>
+        <td class="empty"></td>
+        <td class="cell">
+          <span class="teacher">CS-Ms Maryam Wardah</span>
+          <span class="course">Artificial Intelligence</span>
+          <span class="room">C-202 (Shift-I)</span>
+        </td>
+        <td class="lab-block" colspan="4">
+          <span class="teacher">CS-Mr Hafiz Obiad Ullah Khan</span>
+          <span class="course">Full Stack Web Development Lab</span>
+          <span class="room">Lab 5 A Block (Shift-I)</span>
+        </td>
+        <td class="cell">
+          <span class="teacher">CS-Mr Hafiz Obiad Ullah Khan / CS-Ms Asim Ali Fayyaz</span>
+          <span class="course">Full Stack Web Development</span>
+          <span class="room">Lecture Hall 01</span>
+        </td>
+      </tr>
+
+      <!-- Friday -->
+      <tr>
+        <td class="day-label">Fr</td>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td class="cell">
+          <span class="teacher">AUSOM-Ms Ayesha Munir-VFM</span>
+          <span class="course">Introduction to Management</span>
+          <span class="room">C-302 (Shift-I)</span>
+        </td>
+        <td class="cell">
+          <span class="teacher">Maths-Dr Waqas Sarwar Abbasi</span>
+          <span class="course">Linear Algebra</span>
+          <span class="room">C-301 (Shift-I)</span>
+        </td>
+        <td class="cell">
+          <span class="teacher">CS-Ms Eemaan Fatima</span>
+          <span class="course">Advisory Class</span>
+          <span class="room">C-202 (Shift-I)</span>
+        </td>
+        <td class="empty"></td>
+        <td class="empty"></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</body>
+</html>
