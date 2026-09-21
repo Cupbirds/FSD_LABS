@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Labs</title>
+<style>
+  :root{
+    --text: #1c1e21;
+    --muted: #65676b;
+    --border: #dadde1;
+    --accent: #1877f2;
+    --bg: #f5f6f8;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    font-family: Helvetica, Arial, sans-serif;
+    color: var(--text);
+  }
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+  }
+  p.sub {
+    color: var(--muted);
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
+  .lab-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .lab-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    text-decoration: none;
+    color: var(--text);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .lab-item:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transform: translateY(-1px);
+  }
+  .lab-name {
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .lab-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .arrow {
+    color: var(--accent);
+    font-size: 1.2rem;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>My Labs</h1>
+    <p class="sub">A collection of HTML/CSS practice tasks.</p>
+
+    <div class="lab-list">
+
+      <a class="lab-item" href="/lab1/">
+        <div>
+          <div class="lab-name">Lab 1</div>
+          <div class="lab-desc">Description for lab 1</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="lab-item" href="/lab2/">
+        <div>
+          <div class="lab-name">Lab 2</div>
+          <div class="lab-desc">Description for lab 2</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <!--
+      <a class="lab-item" href="/lab3/">
+        <div>
+          <div class="lab-name">Lab 3</div>
+          <div class="lab-desc">Description for lab 3</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      -->
+
+      <!--
+      <a class="lab-item" href="/lab4/">
+        <div>
+          <div class="lab-name">Lab 4</div>
+          <div class="lab-desc">Description for lab 4</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      -->
+
+      <!--
+      <a class="lab-item" href="/lab5/">
+        <div>
+          <div class="lab-name">Lab 5</div>
+          <div class="lab-desc">Description for lab 5</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      -->
+
+      <!--
+      <a class="lab-item" href="/lab6/">
+        <div>
+          <div class="lab-name">Lab 6</div>
+          <div class="lab-desc">Description for lab 6</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      -->
+
+      <!--
+      <a class="lab-item" href="/lab7/">
+        <div>
+          <div class="lab-name">Lab 7</div>
+          <div class="lab-desc">Description for lab 7</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      -->
+
+      <!--
+      <a class="lab-item" href="/lab8/">
+        <div>
+          <div class="lab-name">Lab 8</div>
+          <div class="lab-desc">Description for lab 8</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      -->
+
+      <!--
+      <a class="lab-item" href="/lab9/">
+        <div>
+          <div class="lab-name">Lab 9</div>
+          <div class="lab-desc">Description for lab 9</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      -->
+
+      <!--
+      <a class="lab-item" href="/lab10/">
+        <div>
+          <div class="lab-name">Lab 10</div>
+          <div class="lab-desc">Description for lab 10</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      -->
+
+    </div>
+  </div>
+</body>
+</html>
