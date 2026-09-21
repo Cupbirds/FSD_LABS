@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lab 2</title>
+<style>
+  :root{
+    --text: #1c1e21;
+    --muted: #65676b;
+    --border: #dadde1;
+    --accent: #1877f2;
+    --bg: #f5f6f8;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    font-family: Helvetica, Arial, sans-serif;
+    color: var(--text);
+  }
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .back-link:hover { text-decoration: underline; }
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+  }
+  p.sub {
+    color: var(--muted);
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
+  .task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    text-decoration: none;
+    color: var(--text);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .task-item:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transform: translateY(-1px);
+  }
+  .task-name {
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .task-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .arrow {
+    color: var(--accent);
+    font-size: 1.2rem;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back-link" href="/">&larr; Back to all labs</a>
+    <h1>Lab 2</h1>
+    <p class="sub">Tasks completed for Lab 2.</p>
+
+    <div class="task-list">
+
+      <a class="task-item" href="/lab2/task1.html">
+        <div>
+          <div class="task-name">Task 1</div>
+          <div class="task-desc">Description for task 1</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="task-item" href="/lab2/task2.html">
+        <div>
+          <div class="task-name">Task 2</div>
+          <div class="task-desc">Description for task 2</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="task-item" href="/lab2/task3.html">
+        <div>
+          <div class="task-name">Task 3</div>
+          <div class="task-desc">Description for task 3</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="task-item" href="/lab2/task4.html">
+        <div>
+          <div class="task-name">Task 4</div>
+          <div class="task-desc">Description for task 4</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="task-item" href="/lab2/task5.html">
+        <div>
+          <div class="task-name">Task 5</div>
+          <div class="task-desc">Description for task 5</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+</body>
+</html>
