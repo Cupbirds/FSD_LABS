@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | John Doe</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --panel: #ffffff;
+      --panel-soft: #f8fafc;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --accent: #38bdf8;
+      --line: #e2e8f0;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 74px;
+    }
+
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .brand span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      box-shadow: none;
+    }
+
+    .btn.secondary:hover {
+      background: rgba(37, 99, 235, 0.06);
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    .hero {
+      padding-top: 70px;
+      padding-bottom: 60px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 42px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin: 0 0 12px;
+      color: var(--primary);
+      background: rgba(37, 99, 235, 0.08);
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.6rem, 5vw, 5rem);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+    }
+
+    h1 span {
+      color: var(--primary);
+    }
+
+    .hero h2 {
+      margin: 12px 0 18px;
+      font-size: clamp(1.3rem, 2vw, 2rem);
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .hero-text p {
+      margin: 0;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .cta {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .stats {
+      list-style: none;
+      padding: 0;
+      margin: 32px 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .stats li {
+      min-width: 120px;
+    }
+
+    .stats strong {
+      display: block;
+      font-size: 1.7rem;
+      color: var(--text);
+    }
+
+    .stats span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .hero-card {
+      display: flex;
+      justify-content: center;
+    }
+
+    .profile-card {
+      width: min(100%, 430px);
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: white;
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -40px -60px auto;
+      width: 180px;
+      height: 180px;
+      background: rgba(56, 189, 248, 0.2);
+      border-radius: 50%;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e0f2fe, #38bdf8);
+      color: var(--text);
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border: 4px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .mini-info {
+      position: relative;
+      z-index: 1;
+    }
+
+    .mini-info strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .mini-info span {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tech-tags span {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
+
+    .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    .section-heading h3 {
+      margin: 8px 0 0;
+      font-size: clamp(2rem, 3vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .about-box, .project-card, .contact-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.05);
+    }
+
+    .about-box {
+      padding: 30px;
+    }
+
+    .about-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .info-item {
+      background: var(--panel-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 16px;
+    }
+
+    .info-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+    }
+
+    .info-item strong {
+      font-size: 1.12rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.04);
+    }
+
+    .skill-card h4 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+    }
+
+    .skill-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      padding: 22px;
+    }
+
+    .project-card .tag {
+      display: inline-block;
+      padding: 7px 12px;
+      font-size: 0.75rem;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .project-card h4 {
+      margin: 0 0 10px;
+      font-size: 1.4rem;
+    }
+
+    .project-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .project-links a {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .contact-box {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .contact-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--panel-soft);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .site-footer {
+      padding: 20px 0 42px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner,
+      .about-wrap,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid,
+      .skills-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 14px 18px;
+      }
+
+      .projects-grid,
+      .skills-grid,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#home" class="brand">JOHN <span>DOE</span></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a href="#contact" class="btn">Hire Me</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow">Hello, I am</p>
+          <h1>John <span>Doe</span></h1>
+          <h2>Full Stack Developer & Designer</h2>
+          <p>
+            I build modern, responsive, and user-friendly web experiences that help businesses grow and users enjoy every interaction.
+          </p>
+
+          <div class="cta">
+            <a href="#projects" class="btn">View Projects</a>
+            <a href="#contact" class="btn secondary">Let’s Talk</a>
+          </div>
+
+          <ul class="stats">
+            <li>
+              <strong>3+</strong>
+              <span>Years Experience</span>
+            </li>
+            <li>
+              <strong>20+</strong>
+              <span>Projects Done</span>
+            </li>
+            <li>
+              <strong>98%</strong>
+              <span>Client Satisfaction</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="hero-card">
+          <div class="profile-card">
+            <div class="avatar">JD</div>
+            <div class="mini-info">
+              <strong>Available for freelance work</strong>
+              <span>Frontend & Full Stack Developer</span>
+            </div>
+            <div class="tech-tags">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>React</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading">
+          <p>About Me</p>
+          <h3>Crafting digital experiences</h3>
+        </div>
+
+        <div class="about-wrap">
+          <div class="about-box">
+            <p>
+              I am a passionate web developer focused on creating clean interfaces, meaningful user journeys, and efficient digital solutions.
+              My work combines design thinking with technical execution to build websites that are not only beautiful but also practical and scalable.
+            </p>
+
+            <div class="info-grid">
+              <div class="info-item">
+                <span>Name</span>
+                <strong>John Doe</strong>
+              </div>
+              <div class="info-item">
+                <span>Location</span>
+                <strong>Islamabad</strong>
+              </div>
+              <div class="info-item">
+                <span>Email</span>
+                <strong>john@email.com</strong>
+              </div>
+              <div class="info-item">
+                <span>Focus</span>
+                <strong>Web Development</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-box">
+            <p>
+              I enjoy turning ideas into real products, whether it is a personal portfolio, a business website, or a complete web application. My process is simple: understand the goal, design for clarity, and build for performance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading">
+          <p>My Skills</p>
+          <h3>Tools I work with</h3>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h4>Frontend</h4>
+            <ul>
+              <li>HTML5</li>
+              <li>CSS3</li>
+              <li>JavaScript</li>
+              <li>Responsive Design</li>
+            </ul>
+          </div>
+
+          <div class="skill-card">
+            <h4>Frameworks</h4>
+            <ul>
+              <li>React</li>
+              <li>Bootstrap</li>
+              <li>Tailwind CSS</li>
+              <li>Node.js</li>
+            </ul>
+          </div>
+
+          <div class="skill-card">
+            <h4>Design</h4>
+            <ul>
+              <li>UI/UX</li>
+              <li>Wireframing</li>
+              <li>Prototyping</li>
+              <li>Brand Design</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading">
+          <p>Projects</p>
+          <h3>Selected work</h3>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <span class="tag">Website</span>
+            <h4>Business Landing Page</h4>
+            <p>
+              A premium landing page for a startup that needed a clean brand identity and conversion-focused layout.
+            </p>
+            <div class="project-links">
+              <a href="#">Live Demo</a>
+              <a href="#">Code</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <span class="tag">App</span>
+            <h4>Task Management Dashboard</h4>
+            <p>
+              A productivity dashboard with analytics, task tracking, and responsive user experience for daily workflows.
+            </p>
+            <div class="project-links">
+              <a href="#">Live Demo</a>
+              <a href="#">Code</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <span class="tag">Design</span>
+            <h4>Portfolio Redesign</h4>
+            <p>
+              A polished portfolio concept emphasizing elegant typography, clean structure, and strong content hierarchy.
+            </p>
+            <div class="project-links">
+              <a href="#">Live Demo</a>
+              <a href="#">Code</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <p>Contact</p>
+          <h3>Let’s build something great</h3>
+        </div>
+
+        <div class="contact-box">
+          <div>
+            <p>
+              I am open to freelance projects, collaborations, and full-time opportunities. If you have a project in mind, let’s connect and create something meaningful together.
+            </p>
+            <div class="contact-actions">
+              <a href="mailto:john@email.com" class="btn">Email Me</a>
+              <a href="tel:+923001234567" class="btn secondary">Call Now</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="socials">
+              <a href="#" aria-label="GitHub">GH</a>
+              <a href="#" aria-label="LinkedIn">IN</a>
+              <a href="#" aria-label="Dribbble">DR</a>
+              <a href="#" aria-label="Twitter">X</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    © 2026 John Doe. All rights reserved.
+  </footer>
+</body>
+</html>
