@@ -35,15 +35,7 @@
     }
 
     body::before {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background:
-        linear-gradient(rgba(21, 35, 55, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(21, 35, 55, 0.035) 1px, transparent 1px);
-      background-size: 42px 42px;
-      content: '';
-      mask-image: linear-gradient(to bottom, black, transparent 80%);
+      display: none;
     }
 
     .cursor-glow {
@@ -60,13 +52,15 @@
     }
 
     .page-shell {
+      position: relative;
+      z-index: 1;
       width: min(1180px, calc(100% - 48px));
       margin: 0 auto;
     }
 
     .lab-index {
       position: relative;
-      padding-top: 96px;
+      padding-top: 24px;
     }
 
     .lab-index::before {
@@ -76,7 +70,7 @@
       z-index: 0;
       width: 100vw;
       height: 96px;
-      background: linear-gradient(to bottom, #080d14, #080d14 48%, var(--night));
+      background: var(--night);
       content: '';
       transform: translateX(-50%);
     }
@@ -89,10 +83,10 @@
     .dark-hero {
       position: relative;
       display: grid;
-      min-height: 100svh;
+      min-height: 68svh;
       overflow: hidden;
       color: var(--paper);
-      background: linear-gradient(to bottom, var(--night) 0%, var(--night) 88%, #080d14 100%);
+      background: transparent;
       isolation: isolate;
       place-items: center;
     }
@@ -128,7 +122,7 @@
     .dark-hero .hero-title { color: var(--paper); }
 
     .starfield {
-      position: absolute;
+      position: fixed;
       inset: 0;
       z-index: 0;
       width: 100%;
@@ -267,7 +261,7 @@
     .hero {
       position: relative;
       display: grid;
-      min-height: 480px;
+      min-height: 320px;
       align-items: center;
       padding: 86px 0 72px;
     }
@@ -340,7 +334,9 @@
       padding: 26px;
       color: var(--ink);
       background: var(--card-color);
-      box-shadow: 0 8px 0 rgba(21, 35, 55, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.42);
+      border-radius: 16px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18), 0 8px 0 rgba(21, 35, 55, 0.08);
       text-decoration: none;
       transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
       animation: rise-in 0.75s ease both;
@@ -351,11 +347,23 @@
 
     .lab-card:hover,
     .lab-card:focus-visible {
-      box-shadow: 0 18px 0 rgba(21, 35, 55, 0.11), var(--shadow);
+      box-shadow: 0 18px 0 rgba(21, 35, 55, 0.11), 0 20px 45px rgba(0, 0, 0, 0.24);
       transform: translateY(-10px) rotate(-1deg);
     }
 
     .lab-card:focus-visible { outline: 3px solid var(--coral); outline-offset: 5px; }
+
+    .lab-card::before {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.3), transparent 42%);
+      content: '';
+      opacity: 0.42;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .lab-card:hover::before { opacity: 0.72; }
 
     .lab-card::after {
       position: absolute;
@@ -454,7 +462,7 @@
       .dark-hero .topbar { width: 100%; }
       .topbar { padding: 20px 0; }
       .status { font-size: 0.58rem; }
-      .hero { min-height: 330px; padding: 70px 0 60px; }
+      .hero { min-height: 250px; padding: 70px 0 60px; }
       h1.hero-title { font-size: clamp(4.4rem, 25vw, 8rem); }
       .section-heading { display: block; }
       .section-heading p { margin-top: 8px; }
@@ -472,7 +480,6 @@
 </head>
 <body>
   <section class="dark-hero" aria-label="Animated starfield">
-    <canvas class="starfield" aria-hidden="true"></canvas>
     <div class="dark-hero__shell">
       <header class="topbar">
         <a class="brand" href="./" aria-label="FSD Labs home">
@@ -487,6 +494,7 @@
       </section>
     </div>
   </section>
+  <canvas class="starfield" aria-hidden="true"></canvas>
   <main class="page-shell">
     <section class="lab-index" aria-labelledby="labs-heading">
       <div class="section-heading">
@@ -540,7 +548,6 @@
   </main>
 
   <script>
-    const darkHero = document.querySelector('.dark-hero');
     const labHero = document.querySelector('.hero');
     const heroTitle = document.querySelector('.hero-title');
     const starfield = document.querySelector('.starfield');
@@ -690,11 +697,10 @@
       resizeStarfield();
       drawStarfield();
       window.addEventListener('resize', resizeStarfield, { passive: true });
-      if (!reducedMotion && darkHero) {
-        darkHero.addEventListener('pointermove', (event) => {
-          const bounds = darkHero.getBoundingClientRect();
-          pointer.x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
-          pointer.y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+      if (!reducedMotion) {
+        window.addEventListener('pointermove', (event) => {
+          pointer.x = (event.clientX / window.innerWidth - 0.5) * 2;
+          pointer.y = (event.clientY / window.innerHeight - 0.5) * 2;
         }, { passive: true });
       }
     }
