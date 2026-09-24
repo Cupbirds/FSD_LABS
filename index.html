@@ -1,177 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>My Labs</title>
-<style>
-  :root{
-    --text: #1c1e21;
-    --muted: #65676b;
-    --border: #dadde1;
-    --accent: #1877f2;
-    --bg: #f5f6f8;
-  }
-  * { box-sizing: border-box; }
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: var(--bg);
-    font-family: Helvetica, Arial, sans-serif;
-    color: var(--text);
-  }
-  .wrap {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 60px 20px;
-  }
-  h1 {
-    font-size: 1.8rem;
-    margin-bottom: 6px;
-  }
-  p.sub {
-    color: var(--muted);
-    margin-top: 0;
-    margin-bottom: 32px;
-  }
-  .lab-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .lab-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
-    text-decoration: none;
-    color: var(--text);
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
-  }
-  .lab-item:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transform: translateY(-1px);
-  }
-  .lab-name {
-    font-weight: 600;
-    font-size: 1.05rem;
-  }
-  .lab-desc {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-  .arrow {
-    color: var(--accent);
-    font-size: 1.2rem;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101c2d">
+  <title>FSD Labs | Frontend Studio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    :root {
+      --ink: #152337;
+      --muted: #667487;
+      --paper: #f4f6f1;
+      --line: rgba(21, 35, 55, 0.13);
+      --navy: #101c2d;
+      --coral: #ff705c;
+      --mint: #b9e6cf;
+      --yellow: #ffd166;
+      --blue: #8bc8ee;
+      --shadow: 0 22px 60px rgba(28, 49, 63, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: 'Space Grotesk', 'Trebuchet MS', sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(rgba(21, 35, 55, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(21, 35, 55, 0.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      content: '';
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+    }
+
+    .cursor-glow {
+      position: fixed;
+      z-index: -1;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: rgba(255, 112, 92, 0.1);
+      filter: blur(12px);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.4s ease;
+    }
+
+    .page-shell {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+      animation: slide-down 0.7s ease both;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: inherit;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      color: var(--paper);
+      background: var(--navy);
+      place-items: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      transform: rotate(-8deg);
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #42bd79;
+      box-shadow: 0 0 0 5px rgba(66, 189, 121, 0.13);
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 340px;
+      align-items: center;
+      padding: 86px 0 72px;
+    }
+
+    h1.hero-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(5.6rem, 20vw, 15rem);
+      font-weight: 600;
+      letter-spacing: -0.12em;
+      line-height: 0.75;
+      text-align: center;
+      user-select: none;
+    }
+
+    h1.hero-title span {
+      display: inline-block;
+      --pointer-x: 0px;
+      --pointer-y: 0px;
+      color: var(--coral);
+      will-change: transform;
+      animation: letter-float 3.4s ease-in-out infinite;
+    }
+
+    h1.hero-title span:nth-child(2) { color: var(--ink); animation-delay: 0.12s; }
+    h1.hero-title span:nth-child(3) { color: var(--blue); animation-delay: 0.24s; }
+    h1.hero-title span:nth-child(4) { color: var(--ink); animation-delay: 0.36s; }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 1.4rem;
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+    }
+
+    .lab-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      padding-bottom: 105px;
+    }
+
+    .lab-card {
+      position: relative;
+      display: flex;
+      min-height: 390px;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 26px;
+      color: var(--ink);
+      background: var(--card-color);
+      box-shadow: 0 8px 0 rgba(21, 35, 55, 0.08);
+      text-decoration: none;
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+      animation: rise-in 0.75s ease both;
+    }
+
+    .lab-card:nth-child(2) { animation-delay: 0.12s; }
+    .lab-card:nth-child(3) { animation-delay: 0.24s; }
+
+    .lab-card:hover,
+    .lab-card:focus-visible {
+      box-shadow: 0 18px 0 rgba(21, 35, 55, 0.11), var(--shadow);
+      transform: translateY(-10px) rotate(-1deg);
+    }
+
+    .lab-card:focus-visible { outline: 3px solid var(--coral); outline-offset: 5px; }
+
+    .lab-card::after {
+      position: absolute;
+      right: -28px;
+      bottom: -70px;
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgba(21, 35, 55, 0.18);
+      border-radius: 50%;
+      box-shadow: 0 0 0 18px rgba(21, 35, 55, 0.035), 0 0 0 38px rgba(21, 35, 55, 0.03);
+      content: '';
+      transition: transform 0.5s ease;
+    }
+
+    .lab-card:hover::after { transform: scale(1.15) rotate(25deg); }
+    .card-top, .card-bottom { position: relative; z-index: 1; }
+
+    .lab-number {
+      display: inline-flex;
+      width: 43px;
+      height: 43px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(21, 35, 55, 0.3);
+      border-radius: 50%;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+    }
+
+    .lab-card h3 {
+      margin: 65px 0 10px;
+      font-size: 2.15rem;
+      letter-spacing: -0.06em;
+    }
+
+    .lab-card p {
+      max-width: 225px;
+      margin: 0;
+      color: rgba(21, 35, 55, 0.72);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 34px;
+      border-top: 1px solid rgba(21, 35, 55, 0.2);
+      padding-top: 16px;
+    }
+
+    .card-meta {
+      color: rgba(21, 35, 55, 0.67);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+    }
+
+    .card-arrow {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      place-items: center;
+      font-size: 1.15rem;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+
+    .lab-card:hover .card-arrow { color: var(--paper); background: var(--ink); transform: rotate(-45deg); }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 22px 0 30px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.67rem;
+      text-transform: uppercase;
+    }
+
+    @keyframes slide-down { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes rise-in { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 50% { opacity: 0.45; transform: scale(0.8); } }
+    @keyframes letter-float {
+      0%, 100% { transform: translate(var(--pointer-x), var(--pointer-y)) rotate(0); }
+      50% { transform: translate(var(--pointer-x), calc(var(--pointer-y) - 13px)) rotate(-2deg); }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell { width: min(100% - 34px, 600px); }
+      .topbar { padding: 20px 0; }
+      .status { font-size: 0.58rem; }
+      .hero { min-height: 250px; padding: 70px 0 60px; }
+      h1.hero-title { font-size: clamp(4.4rem, 25vw, 8rem); }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 8px; }
+      .lab-grid { grid-template-columns: 1fr; padding-bottom: 70px; }
+      .lab-card { min-height: 320px; }
+      .lab-card h3 { margin-top: 44px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .cursor-glow, h1.hero-title span { display: none; }
+    }
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>My Labs</h1>
-    <p class="sub">A collection of HTML/CSS practice tasks.</p>
-
-    <div class="lab-list">
-
-      <a class="lab-item" href="/Lab1/">
-        <div>
-          <div class="lab-name">Lab 1</div>
-          <div class="lab-desc">Description for lab 1</div>
-        </div>
-        <span class="arrow">→</span>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <main class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="FSD Labs home">
+        <span class="brand-mark">F/</span>
+        <span>FSD Labs</span>
       </a>
+      <div class="status"><span class="status-dot"></span> Studio online</div>
+    </header>
 
-      <a class="lab-item" href="/Lab2/">
-        <div>
-          <div class="lab-name">Lab 2</div>
-          <div class="lab-desc">Description for lab 2</div>
-        </div>
-        <span class="arrow">→</span>
-      </a>
+    <section class="hero" aria-labelledby="page-title">
+      <h1 class="hero-title" id="page-title" aria-label="Labs"><span>L</span><span>A</span><span>B</span><span>S</span></h1>
+    </section>
 
-      <a class="lab-item" href="/Lab3/">
-        <div>
-          <div class="lab-name">Lab 3</div>
-          <div class="lab-desc">Lab 2 tasks recreated with Bootstrap</div>
-        </div>
-        <span class="arrow">→</span>
-      </a>
+    <section aria-labelledby="labs-heading">
+      <div class="section-heading">
+        <h2 id="labs-heading">The lab index</h2>
+        <p><span id="lab-count">03</span> active collections / click to explore</p>
+      </div>
 
-      <!--
-      <a class="lab-item" href="/lab4/">
-        <div>
-          <div class="lab-name">Lab 4</div>
-          <div class="lab-desc">Description for lab 4</div>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-      -->
+      <div class="lab-grid">
+        <a class="lab-card" style="--card-color: var(--mint);" href="./Lab1/index.html">
+          <div class="card-top">
+            <span class="lab-number">01</span>
+            <h3>Lab One</h3>
+            <p>Start with the fundamentals: a practical first pass through frontend problem solving.</p>
+          </div>
+          <div class="card-bottom">
+            <span class="card-meta">Foundation</span>
+            <span class="card-arrow" aria-hidden="true">&#8599;</span>
+          </div>
+        </a>
 
-      <!--
-      <a class="lab-item" href="/lab5/">
-        <div>
-          <div class="lab-name">Lab 5</div>
-          <div class="lab-desc">Description for lab 5</div>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-      -->
+        <a class="lab-card" style="--card-color: var(--yellow);" href="./Lab2/index.html">
+          <div class="card-top">
+            <span class="lab-number">02</span>
+            <h3>Lab Two</h3>
+            <p>Five focused builds covering layouts, interfaces, portfolios, custom UI, and academic design.</p>
+          </div>
+          <div class="card-bottom">
+            <span class="card-meta">HTML + CSS</span>
+            <span class="card-arrow" aria-hidden="true">&#8599;</span>
+          </div>
+        </a>
 
-      <!--
-      <a class="lab-item" href="/lab6/">
-        <div>
-          <div class="lab-name">Lab 6</div>
-          <div class="lab-desc">Description for lab 6</div>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-      -->
+        <a class="lab-card" style="--card-color: var(--blue);" href="./Lab3/index.html">
+          <div class="card-top">
+            <span class="lab-number">03</span>
+            <h3>Lab Three</h3>
+            <p>Rebuild the challenge set with Bootstrap and discover the power of a responsive system.</p>
+          </div>
+          <div class="card-bottom">
+            <span class="card-meta">Bootstrap</span>
+            <span class="card-arrow" aria-hidden="true">&#8599;</span>
+          </div>
+        </a>
+      </div>
+    </section>
 
-      <!--
-      <a class="lab-item" href="/lab7/">
-        <div>
-          <div class="lab-name">Lab 7</div>
-          <div class="lab-desc">Description for lab 7</div>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-      -->
+    <footer class="footer">
+      <span>FSD / Course portfolio</span>
+      <span>Built with curiosity</span>
+    </footer>
+  </main>
 
-      <!--
-      <a class="lab-item" href="/lab8/">
-        <div>
-          <div class="lab-name">Lab 8</div>
-          <div class="lab-desc">Description for lab 8</div>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-      -->
+  <script>
+    const glow = document.querySelector('.cursor-glow');
+    const heroTitle = document.querySelector('.hero-title');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      <!--
-      <a class="lab-item" href="/lab9/">
-        <div>
-          <div class="lab-name">Lab 9</div>
-          <div class="lab-desc">Description for lab 9</div>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-      -->
+    if (heroTitle && !reducedMotion) {
+      const letters = [...heroTitle.querySelectorAll('span')];
+      const currentOffsets = letters.map(() => ({ x: 0, y: 0 }));
+      const targetOffsets = letters.map(() => ({ x: 0, y: 0 }));
+      const radius = 190;
 
-      <!--
-      <a class="lab-item" href="/lab10/">
-        <div>
-          <div class="lab-name">Lab 10</div>
-          <div class="lab-desc">Description for lab 10</div>
-        </div>
-        <span class="arrow">→</span>
-      </a>
-      -->
+      const updateTargets = (event) => {
+        letters.forEach((letter, index) => {
+          const bounds = letter.getBoundingClientRect();
+          const distanceX = event.clientX - (bounds.left + bounds.width / 2);
+          const distanceY = event.clientY - (bounds.top + bounds.height / 2);
+          const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
+          const strength = Math.max(0, (radius - distance) / radius);
+          const direction = distance || 1;
 
-    </div>
-  </div>
+          targetOffsets[index].x = (-distanceX / direction) * strength * 62;
+          targetOffsets[index].y = (-distanceY / direction) * strength * 38;
+        });
+      };
+
+      const resetTargets = () => targetOffsets.forEach((offset) => {
+        offset.x = 0;
+        offset.y = 0;
+      });
+
+      const animateOffsets = () => {
+        letters.forEach((letter, index) => {
+          const current = currentOffsets[index];
+          const target = targetOffsets[index];
+          current.x += (target.x - current.x) * 0.14;
+          current.y += (target.y - current.y) * 0.14;
+          letter.style.setProperty('--pointer-x', `${current.x.toFixed(2)}px`);
+          letter.style.setProperty('--pointer-y', `${current.y.toFixed(2)}px`);
+        });
+        window.requestAnimationFrame(animateOffsets);
+      };
+
+      heroTitle.addEventListener('pointermove', updateTargets, { passive: true });
+      heroTitle.addEventListener('pointerleave', resetTargets, { passive: true });
+      window.requestAnimationFrame(animateOffsets);
+    }
+
+    if (!reducedMotion && glow) {
+      window.addEventListener('pointermove', (event) => {
+        glow.style.left = `${event.clientX}px`;
+        glow.style.top = `${event.clientY}px`;
+      }, { passive: true });
+    }
+  </script>
 </body>
 </html>
