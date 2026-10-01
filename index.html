@@ -319,7 +319,7 @@
 
     .lab-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 18px;
       padding-bottom: 105px;
     }
@@ -344,6 +344,7 @@
 
     .lab-card:nth-child(2) { animation-delay: 0.12s; }
     .lab-card:nth-child(3) { animation-delay: 0.24s; }
+    .lab-card:nth-child(4) { animation-delay: 0.36s; }
 
     .lab-card:hover,
     .lab-card:focus-visible {
@@ -499,7 +500,7 @@
     <section class="lab-index" aria-labelledby="labs-heading">
       <div class="section-heading">
         <h2 id="labs-heading">The lab index</h2>
-        <p><span id="lab-count">03</span> active collections / click to explore</p>
+        <p><span id="lab-count">04</span> active collections / click to explore</p>
       </div>
 
       <div class="lab-grid">
@@ -535,6 +536,18 @@
           </div>
           <div class="card-bottom">
             <span class="card-meta">Bootstrap</span>
+            <span class="card-arrow" aria-hidden="true">&#8599;</span>
+          </div>
+        </a>
+
+        <a class="lab-card" style="--card-color: var(--coral);" href="./Lab4/index.html">
+          <div class="card-top">
+            <span class="lab-number">04</span>
+            <h3>Lab Four</h3>
+            <p>Explore JavaScript-driven tasks, logic building, and interactive frontend problem solving.</p>
+          </div>
+          <div class="card-bottom">
+            <span class="card-meta">JavaScript</span>
             <span class="card-arrow" aria-hidden="true">&#8599;</span>
           </div>
         </a>
