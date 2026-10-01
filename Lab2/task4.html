@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +20,9 @@
       --shadow: 0 12px 24px rgba(79, 70, 229, 0.12);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -119,7 +122,8 @@
       margin-bottom: 28px;
     }
 
-    .primary-btn, .secondary-btn {
+    .primary-btn,
+    .secondary-btn {
       display: inline-block;
       padding: 14px 22px;
       border-radius: 10px;
@@ -139,7 +143,8 @@
       border: 1px solid var(--primary);
     }
 
-    .primary-btn:hover, .secondary-btn:hover {
+    .primary-btn:hover,
+    .secondary-btn:hover {
       transform: translateY(-2px);
     }
 
@@ -150,7 +155,7 @@
     }
 
     .stat-box {
-      background: rgba(255,255,255,0.7);
+      background: rgba(255, 255, 255, 0.7);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 18px 20px;
@@ -184,7 +189,7 @@
       position: absolute;
       width: 180px;
       height: 180px;
-      background: rgba(255,255,255,0.08);
+      background: rgba(255, 255, 255, 0.08);
       border-radius: 50%;
       top: -35px;
       right: -30px;
@@ -196,8 +201,8 @@
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.16);
-      border: 2px solid rgba(255,255,255,0.4);
+      background: rgba(255, 255, 255, 0.16);
+      border: 2px solid rgba(255, 255, 255, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -209,8 +214,8 @@
     .mini-panel {
       position: relative;
       z-index: 1;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 16px;
       padding: 18px;
       margin-top: 18px;
@@ -223,7 +228,7 @@
 
     .mini-panel p {
       margin: 0;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       line-height: 1.7;
     }
 
@@ -291,7 +296,8 @@
       margin-top: 20px;
     }
 
-    .big-card, .small-card {
+    .big-card,
+    .small-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 20px;
@@ -353,7 +359,7 @@
 
     .cta-box p {
       margin: 0 0 20px;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
     }
 
     .cta-box a {
@@ -367,6 +373,7 @@
     }
 
     @media (max-width: 800px) {
+
       .hero-inner,
       .showcase,
       .feature-grid {
@@ -386,6 +393,7 @@
     }
   </style>
 </head>
+
 <body>
   <header class="topbar">
     <div class="container nav">
@@ -406,7 +414,8 @@
         <div class="hero-text">
           <h1>Build better <span class="highlight">digital experiences</span></h1>
           <p>
-            A clean and modern UI concept designed with beginner-friendly HTML and CSS principles like spacing, borders, cards, buttons, layouts, and hover effects.
+            A clean and modern UI concept designed with beginner-friendly HTML and CSS principles like spacing, borders,
+            cards, buttons, layouts, and hover effects.
           </p>
 
           <div class="cta-row">
@@ -434,7 +443,8 @@
           <div class="circle">UI</div>
           <div class="mini-panel">
             <h3>Creative design system</h3>
-            <p>Responsive layouts, rounded cards, simple color palettes, and clean typography for a polished user interface.</p>
+            <p>Responsive layouts, rounded cards, simple color palettes, and clean typography for a polished user
+              interface.</p>
           </div>
         </div>
       </div>
@@ -509,4 +519,5 @@
     </section>
   </main>
 </body>
+
 </html>

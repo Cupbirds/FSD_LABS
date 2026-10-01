@@ -1,343 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lab 4 | JavaScript Tasks</title>
-    <style>
-      :root {
-        --bg: #f4f7fb;
-        --panel: #ffffff;
-        --primary: #1a3c7a;
-        --primary-light: #eef4ff;
-        --text: #1d2433;
-        --muted: #55627a;
-        --border: #dfe7f3;
-        --shadow: 0 8px 24px rgba(20, 32, 58, 0.08);
-      }
 
-      * {
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab 4 | JavaScript Tasks</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --primary: #1a3c7a;
+      --primary-light: #eef4ff;
+      --text: #1d2433;
+      --muted: #55627a;
+      --border: #dfe7f3;
+      --shadow: 0 8px 24px rgba(20, 32, 58, 0.08);
+    }
 
-      body {
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 100%);
-        color: var(--text);
-      }
+    * {
+      box-sizing: border-box;
+    }
 
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 30px 20px 50px;
-      }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 100%);
+      color: var(--text);
+    }
 
-      .page-header {
-        text-align: center;
-        margin-bottom: 25px;
-      }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px 50px;
+    }
 
-      .page-header h1 {
-        margin: 0;
-        font-size: clamp(2rem, 4vw, 3rem);
-        color: var(--primary);
-      }
+    .page-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
 
-      .page-header p {
-        color: var(--muted);
-        font-size: 1.02rem;
-      }
+    .page-header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--primary);
+    }
 
-      .task-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 22px;
-      }
+    .page-header p {
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
 
-      .task-card {
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 20px 18px;
-        box-shadow: var(--shadow);
-        min-height: 220px;
-      }
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
 
-      .task-card h2 {
-        margin: 0 0 16px;
-        color: var(--primary);
-        font-size: 1.4rem;
-      }
+    .task-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 18px;
+      box-shadow: var(--shadow);
+      min-height: 220px;
+    }
 
-      .code-box,
-      .output-box {
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        margin-top: 12px;
-        padding: 12px;
-      }
+    .task-card h2 {
+      margin: 0 0 16px;
+      color: var(--primary);
+      font-size: 1.4rem;
+    }
 
-      .code-box {
-        background: #f4f6f8;
-      }
+    .code-box,
+    .output-box {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-top: 12px;
+      padding: 12px;
+    }
 
-      .output-box {
-        background: var(--primary-light);
-      }
+    .code-box {
+      background: #f4f6f8;
+    }
 
-      .box-title {
-        display: block;
-        margin-bottom: 8px;
-        color: var(--muted);
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-      }
+    .output-box {
+      background: var(--primary-light);
+    }
 
-      .code-box pre {
-        margin: 0;
-        overflow-x: auto;
-        font-family: Consolas, monospace;
-        font-size: 0.82rem;
-        line-height: 1.55;
-        white-space: pre-wrap;
-        overflow-wrap: anywhere;
-      }
+    .box-title {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
 
-      .output-value {
-        font-size: 0.9rem;
-        line-height: 1.7;
-        overflow-wrap: anywhere;
-      }
+    .code-box pre {
+      margin: 0;
+      overflow-x: auto;
+      font-family: Consolas, monospace;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
 
-      .task-output {
-        font-size: 0.98rem;
-        line-height: 1.7;
-      }
+    .output-value {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
 
-      .task-output p {
-        margin: 0 0 8px;
-      }
+    .task-output {
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
 
-      .task-output strong {
-        color: var(--text);
-      }
+    .task-output p {
+      margin: 0 0 8px;
+    }
 
-      .task-output button {
-        background: var(--primary);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 16px;
-        cursor: pointer;
-        font-size: 0.95rem;
-        transition: 0.2s ease;
-      }
+    .task-output strong {
+      color: var(--text);
+    }
 
-      .task-output.task1-box,
-      .task-output.task2-box {
-        padding: 6px 0;
-      }
+    .task-output button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
 
-      .profile-card {
-        background: linear-gradient(135deg, #f5f9ff 0%, #edf3ff 100%);
-        border: 1px solid #d9e7ff;
-        border-radius: 16px;
-        padding: 16px;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
-      }
+    .task-output.task1-box,
+    .task-output.task2-box {
+      padding: 6px 0;
+    }
 
-      .profile-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 14px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid #dfe9ff;
-      }
+    .profile-card {
+      background: linear-gradient(135deg, #f5f9ff 0%, #edf3ff 100%);
+      border: 1px solid #d9e7ff;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
 
-      .avatar {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #1a3c7a, #4e7be0);
-        color: white;
-        display: grid;
-        place-items: center;
-        font-weight: bold;
-        font-size: 1.1rem;
-      }
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #dfe9ff;
+    }
 
-      .profile-header h3 {
-        margin: 0;
-        font-size: 1.12rem;
-        color: var(--primary);
-      }
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a3c7a, #4e7be0);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
 
-      .profile-header span {
-        color: var(--muted);
-        font-size: 0.8rem;
-      }
+    .profile-header h3 {
+      margin: 0;
+      font-size: 1.12rem;
+      color: var(--primary);
+    }
 
-      .profile-body {
-        display: grid;
-        gap: 8px;
-      }
+    .profile-header span {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
 
-      .profile-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        background: rgba(255, 255, 255, 0.75);
-        border-radius: 10px;
-        padding: 8px 10px;
-      }
+    .profile-body {
+      display: grid;
+      gap: 8px;
+    }
 
-      .profile-label {
-        font-weight: 700;
-        color: var(--primary);
-      }
+    .profile-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.75);
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
 
-      .profile-value {
-        color: var(--text);
-        text-align: right;
-      }
+    .profile-label {
+      font-weight: 700;
+      color: var(--primary);
+    }
 
-      .status-card {
-        background: linear-gradient(135deg, #fff8ea, #fff2d8);
-        border: 1px solid #f7d89c;
-        border-radius: 16px;
-        padding: 18px 16px;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-      }
+    .profile-value {
+      color: var(--text);
+      text-align: right;
+    }
 
-      .status-icon {
-        width: 65px;
-        height: 65px;
-        border-radius: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #f59e0b, #fbbf24);
-        color: white;
-        font-size: 1.5rem;
-        font-weight: 700;
-      }
+    .status-card {
+      background: linear-gradient(135deg, #fff8ea, #fff2d8);
+      border: 1px solid #f7d89c;
+      border-radius: 16px;
+      padding: 18px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
-      .status-text {
-        display: flex;
-        flex-direction: column;
-      }
+    .status-icon {
+      width: 65px;
+      height: 65px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
 
-      .status-label {
-        color: var(--muted);
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-      }
+    .status-text {
+      display: flex;
+      flex-direction: column;
+    }
 
-      .status-text strong {
-        font-size: 1.5rem;
-        color: #b45309;
-        text-transform: uppercase;
-      }
+    .status-label {
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
 
-      .status-meta {
-        margin-top: 4px;
-        color: var(--muted);
-        font-size: 0.8rem;
-      }
+    .status-text strong {
+      font-size: 1.5rem;
+      color: #b45309;
+      text-transform: uppercase;
+    }
 
-      .mini-card {
-        background: linear-gradient(135deg, #f8fbff, #eef4ff);
-        border: 1px solid #dfeaff;
-        border-radius: 16px;
-        padding: 16px;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-      }
+    .status-meta {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
 
-      .mini-icon {
-        width: 52px;
-        height: 52px;
-        border-radius: 14px;
-        background: linear-gradient(135deg, #2d6cdf, #6ea6ff);
-        color: white;
-        display: grid;
-        place-items: center;
-        font-size: 1.4rem;
-        font-weight: 700;
-      }
+    .mini-card {
+      background: linear-gradient(135deg, #f8fbff, #eef4ff);
+      border: 1px solid #dfeaff;
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
-      .mini-label {
-        display: block;
-        color: var(--muted);
-        font-size: 0.72rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-      }
+    .mini-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #2d6cdf, #6ea6ff);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
 
-      .mini-value {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--primary);
-      }
+    .mini-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
 
-      .result-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        gap: 8px;
-      }
+    .mini-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
 
-      .result-list li {
-        background: #f7f9ff;
-        border: 1px solid #e5ebff;
-        border-radius: 10px;
-        padding: 8px 10px;
-        color: var(--text);
-      }
+    .result-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+    }
 
-      .task-output button {
-        background: var(--primary);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 16px;
-        cursor: pointer;
-        font-size: 0.95rem;
-        transition: 0.2s ease;
-      }
+    .result-list li {
+      background: #f7f9ff;
+      border: 1px solid #e5ebff;
+      border-radius: 10px;
+      padding: 8px 10px;
+      color: var(--text);
+    }
 
-      .task-output button:hover {
-        background: #12376d;
-      }
-    </style>
-    <script src="./task1.js" defer></script>
-    <script src="./task2.js" defer></script>
-    <script src="./task3.js" defer></script>
-    <script src="./task4.js" defer></script>
-    <script src="./task5.js" defer></script>
-    <script src="./task6.js" defer></script>
-  </head>
-  <body>
-    <div class="container">
-      <header class="page-header">
-        <h1>Lab 4 - JavaScript Tasks</h1>
-        <p>Six short JavaScript exercises combined into one lab page.</p>
-      </header>
+    .task-output button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
 
-      <main class="task-grid">
-        <section class="task-card">
-          <h2>Task 1</h2>
-          <div class="code-box">
-            <span class="box-title">Code</span>
-            <pre>var name = "Abdy";
+    .task-output button:hover {
+      background: #12376d;
+    }
+  </style>
+  <script src="./task1.js" defer></script>
+  <script src="./task2.js" defer></script>
+  <script src="./task3.js" defer></script>
+  <script src="./task4.js" defer></script>
+  <script src="./task5.js" defer></script>
+  <script src="./task6.js" defer></script>
+</head>
+
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1>Lab 4 - JavaScript Tasks</h1>
+      <p>Six short JavaScript exercises combined into one lab page.</p>
+    </header>
+
+    <main class="task-grid">
+      <section class="task-card">
+        <h2>Task 1</h2>
+        <div class="code-box">
+          <span class="box-title">Code</span>
+          <pre>var name = "Abdy";
 var age = 21;
 var isStudent = true;
 var university = "Your University Name";
@@ -346,26 +348,26 @@ var country = "Your Country";
 var degreeName = "BS Computer Science";
 var semester = 5;
 var cgpa = 3.4;</pre>
+        </div>
+        <div class="output-box">
+          <span class="box-title">Output</span>
+          <div class="output-value">
+            <strong>Name:</strong> Abdy<br />
+            <strong>Age:</strong> 21<br />
+            <strong>Student:</strong> true<br />
+            <strong>University:</strong> Your University Name<br />
+            <strong>Location:</strong> Your City, Your Country<br />
+            <strong>Degree:</strong> BS Computer Science (Semester 5)<br />
+            <strong>CGPA:</strong> 3.4
           </div>
-          <div class="output-box">
-            <span class="box-title">Output</span>
-            <div class="output-value">
-              <strong>Name:</strong> Abdy<br />
-              <strong>Age:</strong> 21<br />
-              <strong>Student:</strong> true<br />
-              <strong>University:</strong> Your University Name<br />
-              <strong>Location:</strong> Your City, Your Country<br />
-              <strong>Degree:</strong> BS Computer Science (Semester 5)<br />
-              <strong>CGPA:</strong> 3.4
-            </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="task-card">
-          <h2>Task 2</h2>
-          <div class="code-box">
-            <span class="box-title">Code</span>
-            <pre>function isPrime(num) {
+      <section class="task-card">
+        <h2>Task 2</h2>
+        <div class="code-box">
+          <span class="box-title">Code</span>
+          <pre>function isPrime(num) {
   if (num &lt; 2) return false;
   for (let i = 2; i * i &lt;= num; i++) {
     if (num % i === 0) return false;
@@ -378,40 +380,40 @@ let next = givenPrime + 1;
 while (!isPrime(next)) {
   next++;
 }</pre>
+        </div>
+        <div class="output-box">
+          <span class="box-title">Output</span>
+          <div class="output-value">
+            <strong>Given number:</strong> 15<br />
+            <strong>Next prime:</strong> 17
           </div>
-          <div class="output-box">
-            <span class="box-title">Output</span>
-            <div class="output-value">
-              <strong>Given number:</strong> 15<br />
-              <strong>Next prime:</strong> 17
-            </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="task-card">
-          <h2>Task 3</h2>
-          <div class="code-box">
-            <span class="box-title">Code</span>
-            <pre>function createPhoneNumber(numbers) {
+      <section class="task-card">
+        <h2>Task 3</h2>
+        <div class="code-box">
+          <span class="box-title">Code</span>
+          <pre>function createPhoneNumber(numbers) {
   let area = "" + numbers[0] + numbers[1] + numbers[2];
   let prefix = "" + numbers[3] + numbers[4] + numbers[5];
   let line = "" + numbers[6] + numbers[7] + numbers[8] + numbers[9];
   return "(" + area + ") " + prefix + "-" + line;
 }</pre>
+        </div>
+        <div class="output-box">
+          <span class="box-title">Output</span>
+          <div class="output-value">
+            <strong>(123) 456-7890</strong>
           </div>
-          <div class="output-box">
-            <span class="box-title">Output</span>
-            <div class="output-value">
-              <strong>(123) 456-7890</strong>
-            </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="task-card">
-          <h2>Task 4</h2>
-          <div class="code-box">
-            <span class="box-title">Code</span>
-            <pre>function roundMe(...args) {
+      <section class="task-card">
+        <h2>Task 4</h2>
+        <div class="code-box">
+          <span class="box-title">Code</span>
+          <pre>function roundMe(...args) {
   if (args.length === 0) return 0;
   if (args.length === 1) return Math.round(args[0]);
   let result = [];
@@ -420,22 +422,22 @@ while (!isPrime(next)) {
   }
   return result;
 }</pre>
+        </div>
+        <div class="output-box">
+          <span class="box-title">Output</span>
+          <div class="output-value">
+            <strong>roundMe()</strong> → 0<br />
+            <strong>roundMe(4.7)</strong> → 5<br />
+            <strong>roundMe(4.7, 4.4)</strong> → [5, 4]
           </div>
-          <div class="output-box">
-            <span class="box-title">Output</span>
-            <div class="output-value">
-              <strong>roundMe()</strong> → 0<br />
-              <strong>roundMe(4.7)</strong> → 5<br />
-              <strong>roundMe(4.7, 4.4)</strong> → [5, 4]
-            </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="task-card">
-          <h2>Task 5</h2>
-          <div class="code-box">
-            <span class="box-title">Code</span>
-            <pre>function abs(...args) {
+      <section class="task-card">
+        <h2>Task 5</h2>
+        <div class="code-box">
+          <span class="box-title">Code</span>
+          <pre>function abs(...args) {
   if (args.length === 0) return 0;
   if (args.length === 1) return Math.abs(args[0]);
   let result = [];
@@ -444,23 +446,23 @@ while (!isPrime(next)) {
   }
   return result;
 }</pre>
+        </div>
+        <div class="output-box">
+          <span class="box-title">Output</span>
+          <div class="output-value">
+            <strong>abs(-5.5)</strong> → 5.5<br />
+            <strong>abs(-3, 4, -7)</strong> → [3, 4, 7]<br />
+            <strong>ceil(4.1)</strong> → 5<br />
+            <strong>floor(4.9)</strong> → 4
           </div>
-          <div class="output-box">
-            <span class="box-title">Output</span>
-            <div class="output-value">
-              <strong>abs(-5.5)</strong> → 5.5<br />
-              <strong>abs(-3, 4, -7)</strong> → [3, 4, 7]<br />
-              <strong>ceil(4.1)</strong> → 5<br />
-              <strong>floor(4.9)</strong> → 4
-            </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="task-card">
-          <h2>Task 6</h2>
-          <div class="code-box">
-            <span class="box-title">Code</span>
-            <pre>function sumOfMultiples(x, y, z) {
+      <section class="task-card">
+        <h2>Task 6</h2>
+        <div class="code-box">
+          <span class="box-title">Code</span>
+          <pre>function sumOfMultiples(x, y, z) {
   let sum = 0;
   for (let i = 1; i < z; i++) {
     if (i % x === 0 || i % y === 0) {
@@ -469,15 +471,16 @@ while (!isPrime(next)) {
   }
   return sum;
 }</pre>
+        </div>
+        <div class="output-box">
+          <span class="box-title">Output</span>
+          <div class="output-value">
+            <strong>sumOfMultiples(3, 5, 10)</strong> → 23
           </div>
-          <div class="output-box">
-            <span class="box-title">Output</span>
-            <div class="output-value">
-              <strong>sumOfMultiples(3, 5, 10)</strong> → 23
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-  </body>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+
 </html>
