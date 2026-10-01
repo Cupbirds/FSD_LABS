@@ -70,6 +70,47 @@
         font-size: 1.4rem;
       }
 
+      .code-box,
+      .output-box {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-top: 12px;
+        padding: 12px;
+      }
+
+      .code-box {
+        background: #f4f6f8;
+      }
+
+      .output-box {
+        background: var(--primary-light);
+      }
+
+      .box-title {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .code-box pre {
+        margin: 0;
+        overflow-x: auto;
+        font-family: Consolas, monospace;
+        font-size: 0.82rem;
+        line-height: 1.55;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+
+      .output-value {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+      }
+
       .task-output {
         font-size: 0.98rem;
         line-height: 1.7;
@@ -277,6 +318,12 @@
         background: #12376d;
       }
     </style>
+    <script src="./task1.js" defer></script>
+    <script src="./task2.js" defer></script>
+    <script src="./task3.js" defer></script>
+    <script src="./task4.js" defer></script>
+    <script src="./task5.js" defer></script>
+    <script src="./task6.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -318,7 +365,15 @@ var cgpa = 3.4;</pre>
           <h2>Task 2</h2>
           <div class="code-box">
             <span class="box-title">Code</span>
-            <pre>let givenPrime = 15;
+            <pre>function isPrime(num) {
+  if (num &lt; 2) return false;
+  for (let i = 2; i * i &lt;= num; i++) {
+    if (num % i === 0) return false;
+  }
+  return true;
+}
+
+let givenPrime = 15;
 let next = givenPrime + 1;
 while (!isPrime(next)) {
   next++;
@@ -327,7 +382,7 @@ while (!isPrime(next)) {
           <div class="output-box">
             <span class="box-title">Output</span>
             <div class="output-value">
-              <strong>Given prime:</strong> 15<br />
+              <strong>Given number:</strong> 15<br />
               <strong>Next prime:</strong> 17
             </div>
           </div>
